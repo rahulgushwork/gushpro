@@ -843,23 +843,54 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Store in Supabase
+            // Store in Supabase with backward compatibility
             try {
+                // First try with all new columns
+                let insertData = {
+                    lead_challenge: formData.leadChallenge,
+                    phone_number: formData.phoneNumber,
+                    business_email: formData.businessEmail,
+                    company_name: formData.companyName,
+                    submission_timestamp: formData.timestamp,
+                    submission_id: formData.submissionId
+                };
+
+                // Add new columns if they exist
+                if (formData.contactName) {
+                    insertData.contact_name = formData.contactName;
+                }
+                if (formData.companyValueProp) {
+                    insertData.company_value_prop = formData.companyValueProp;
+                }
+
                 const { data, error } = await supabase
                     .from('waitlist_submissions')
-                    .insert([{
-                        lead_challenge: formData.leadChallenge,
-                        contact_name: formData.contactName,
-                        phone_number: formData.phoneNumber,
-                        business_email: formData.businessEmail,
-                        company_name: formData.companyName,
-                        company_value_prop: formData.companyValueProp,
-                        submission_timestamp: formData.timestamp,
-                        submission_id: formData.submissionId
-                    }]);
+                    .insert([insertData]);
 
                 if (error) {
-                    throw error;
+                    // If error is about missing columns, try with basic columns only
+                    if (error.code === '42703' || error.message.includes('column') || error.message.includes('does not exist')) {
+                        console.warn('New columns not found, falling back to basic schema:', error);
+                        
+                        const basicData = {
+                            lead_challenge: formData.leadChallenge,
+                            phone_number: formData.phoneNumber,
+                            business_email: formData.businessEmail,
+                            company_name: formData.companyName,
+                            submission_timestamp: formData.timestamp,
+                            submission_id: formData.submissionId
+                        };
+                        
+                        const { data: retryData, error: retryError } = await supabase
+                            .from('waitlist_submissions')
+                            .insert([basicData]);
+                            
+                        if (retryError) {
+                            throw retryError;
+                        }
+                    } else {
+                        throw error;
+                    }
                 }
                 
                 // Log success for debugging
@@ -970,10 +1001,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Function to display the popup
         function showPopup() {
-            if (popupCount >= 3) return; // Prevent popup from showing more than twice
+            if (popupCount >= 3) return; // Prevent popup from showing more than 3 times
 
-            document.getElementById('exit-intent-popup').style.display = 'block';
-            document.getElementById('exit-intent-overlay').style.display = 'block';
+            // Check if elements exist before trying to access them
+            const exitPopup = document.getElementById('exit-intent-popup');
+            const exitOverlay = document.getElementById('exit-intent-overlay');
+            
+            if (exitPopup && exitOverlay) {
+                exitPopup.style.display = 'block';
+                exitOverlay.style.display = 'block';
+            } else {
+                // Fallback to native popup if exit-intent popup doesn't exist
+                const nativePopup = document.getElementById('native-intent-popup');
+                const nativeOverlay = document.getElementById('native-intent-overlay');
+                if (nativePopup && nativeOverlay) {
+                    nativePopup.style.display = 'flex';
+                    nativeOverlay.style.display = 'block';
+                }
+            }
             
             // Increment the popup count and save it to localStorage
             popupCount++;
