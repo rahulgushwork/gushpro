@@ -601,6 +601,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-left: 20px !important;
 }
 
+/* Adjust popup size to prevent overflow while keeping original layout */
+.nativetest_popup_card_block {
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+}
+
+.nativetest_content_card {
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+}
+
+/* Slightly reduce form field spacing */
+.form-question-block.mb_24 {
+    margin-bottom: 20px !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .nativetest_popup_card_block {
+        max-height: 90vh !important;
+        margin: 10px !important;
+    }
+    
+    .form-question-block.mb_24 {
+        margin-bottom: 16px !important;
+    }
+}
+
 .container_nav, .container_new, .ncontainer {
     padding-left: 30px !important;
     padding-right: 30px !important;
@@ -666,7 +694,7 @@ evaluate suppliers. We know that manufacturing sales isn't about flashy
 ads or quick conversions, it's about building authority, being found 
 during long research cycles, and converting technical prospects into 
 qualified leads.</p><p><strong>Our systematic approach replaces the unpredictability of trade shows and referrals with consistent monthly lead generation</strong>, so you can scale revenue without scaling headcount.</p></div></div></div></div></div><div><div  target="_blank" class="socio_relative w-inline-block" data-faitracker-click-bind="true"><img src="Missing Industrial B2B Leads_ Capture the $$$ You Could Be Earning_files/680a0fe6e0294b3c9240bc46_Social%20Icons.svg" loading="lazy" alt="" class="light_image" style="display: block;"><img src="Missing Industrial B2B Leads_ Capture the $$$ You Could Be Earning_files/680a0f370298b264f9ed3b6d_Social%20Icons%20(1).svg" loading="lazy" alt="" class="dark_image" style="display: none;"></a></div></div><div class="horizontal_line neutal m_12 desk_hide"></div></div></div></div></div><div class="ncopyright_bar"><div class="container_new"><div class="ncopyright_flex"><div><p class="footer-text-_ne">Copyright
- © 2025 Gushpro &nbsp;| &nbsp;All Rights Reserved</p></div><div class="div-block-264"><div id="w-node-cf3b49d3-8e31-ec23-ebc3-02f14f800a7f-4f800a78" class="fs__bottom-block-item-_new"><a href="https://www.gushpro.ai/privacy-policy" class="footer-text-_new" data-faitracker-click-bind="true">Privacy policy </a><a href="https://www.gushpro.ai/terms-of-use" class="footer-text-_new" data-faitracker-click-bind="true">Terms of use</a></div></div></div></div></div></div></div><div class="nativetest-card-block"><div id="native-intent-overlay" class="nativetest_popup-block"></div><div id="native-intent-popup" class="nativetest_popup_card_block"><div id="nativetest" class="nativetest_card-block"><div id="content" class="nativetest_content_card w-node-_32984307-f3d5-9c3d-3b97-fb9d4dc504fb-4dc504f7"><h2 class="native_card_title">Join Our Waitlist</h2><p class="card-subtext mb_24">Answer these quick questions to get priority access and personalized solutions!</p><div class="w-form"><form id="wf-form-Native-Popup-Form" name="wf-form-Native-Popup-Form" data-name="Lead Generation Assessment Form" aria-label="Lead Generation Assessment Form">
+ © 2025 Gushpro &nbsp;| &nbsp;All Rights Reserved</p></div><div class="div-block-264"><div id="w-node-cf3b49d3-8e31-ec23-ebc3-02f14f800a7f-4f800a78" class="fs__bottom-block-item-_new"><a href="https://www.gushpro.ai/privacy-policy" class="footer-text-_new" data-faitracker-click-bind="true">Privacy policy </a><a href="https://www.gushpro.ai/terms-of-use" class="footer-text-_new" data-faitracker-click-bind="true">Terms of use</a></div></div></div></div></div></div></div><div class="nativetest-card-block"><div id="native-intent-overlay" class="nativetest_popup-block"></div><div id="native-intent-popup" class="nativetest_popup_card_block"><div id="nativetest" class="nativetest_card-block"><div id="content" class="nativetest_content_card w-node-_32984307-f3d5-9c3d-3b97-fb9d4dc504fb-4dc504f7"><h2 class="native_card_title">Join Our Waitlist</h2><p class="card-subtext mb_24">Answer these quick questions to get priority access to relevant leads!</p><div class="w-form"><form id="wf-form-Native-Popup-Form" name="wf-form-Native-Popup-Form" data-name="Lead Generation Assessment Form" aria-label="Lead Generation Assessment Form">
   
   <!-- Question 1: Multiple Choice -->
   <div class="form-question-block mb_24">
@@ -682,22 +710,34 @@ qualified leads.</p><p><strong>Our systematic approach replaces the unpredictabi
     </select>
   </div>
 
-  <!-- Question 2: Phone Number -->
+  <!-- Question 2: Point of Contact Name -->
   <div class="form-question-block mb_24">
-    <label for="phone-number" class="native_form_label">2. What number should we give to the lead to reach out to you?</label>
+    <label for="contact-name" class="native_form_label">2. Name of the point-of-contact?</label>
+    <input class="native_form_field w-input" name="contact-name" id="contact-name" placeholder="Enter your full name" type="text" required>
+  </div>
+
+  <!-- Question 3: Phone Number -->
+  <div class="form-question-block mb_24">
+    <label for="phone-number" class="native_form_label">3. What number should we give to the lead to reach out to you?</label>
     <input class="native_form_field w-input" name="phone-number" id="phone-number" placeholder="Enter your phone number" type="tel" required>
   </div>
 
-  <!-- Question 3: Business Email -->
+  <!-- Question 4: Business Email -->
   <div class="form-question-block mb_24">
-    <label for="business-email" class="native_form_label">3. Your business email address</label>
+    <label for="business-email" class="native_form_label">4. Your business email address</label>
     <input class="native_form_field w-input" name="business-email" id="business-email" placeholder="Enter your business email" type="email" required>
   </div>
 
-  <!-- Question 4: Company Name -->
+  <!-- Question 5: Company Name -->
   <div class="form-question-block mb_24">
-    <label for="company-name" class="native_form_label">4. Company name</label>
+    <label for="company-name" class="native_form_label">5. Company name</label>
     <input class="native_form_field w-input" name="company-name" id="company-name" placeholder="Enter your company name" type="text" required>
+  </div>
+
+  <!-- Question 6: Company Value Proposition -->
+  <div class="form-question-block mb_24">
+    <label for="company-value-prop" class="native_form_label">6. Why should prospects choose your company?</label>
+    <textarea class="native_form_field w-input" name="company-value-prop" id="company-value-prop" placeholder="Describe what makes your company unique and why prospects should choose you over competitors" rows="3" required></textarea>
   </div>
 
   <input type="submit" data-wait="Submitting..." class="nprimary_btn arrow w_full w-button" value="Join Waitlist!">
@@ -788,15 +828,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Collect form data
             const formData = {
                 leadChallenge: document.getElementById('lead-challenge').value,
+                contactName: document.getElementById('contact-name').value,
                 phoneNumber: document.getElementById('phone-number').value,
                 businessEmail: document.getElementById('business-email').value,
                 companyName: document.getElementById('company-name').value,
+                companyValueProp: document.getElementById('company-value-prop').value,
                 timestamp: document.getElementById('submission-timestamp').value,
                 submissionId: 'form_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
             };
 
             // Validate required fields
-            if (!formData.leadChallenge || !formData.phoneNumber || !formData.businessEmail || !formData.companyName) {
+            if (!formData.leadChallenge || !formData.contactName || !formData.phoneNumber || !formData.businessEmail || !formData.companyName || !formData.companyValueProp) {
                 showError('Please fill in all required fields.');
                 return;
             }
@@ -807,9 +849,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     .from('waitlist_submissions')
                     .insert([{
                         lead_challenge: formData.leadChallenge,
+                        contact_name: formData.contactName,
                         phone_number: formData.phoneNumber,
                         business_email: formData.businessEmail,
                         company_name: formData.companyName,
+                        company_value_prop: formData.companyValueProp,
                         submission_timestamp: formData.timestamp,
                         submission_id: formData.submissionId
                     }]);
